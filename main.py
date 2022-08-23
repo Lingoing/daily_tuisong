@@ -102,15 +102,14 @@ def get_weather(province, city):
 #词霸每日一句
 def get_ciba():
     if (Whether_Eng!="否"):
-        url = "http://open.iciba.com/dsapi/"
-        headers = {
-            'Content-Type': 'application/json',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
-                        'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36'
-        }
-        r = get(url, headers=headers)
-        note_en = r.json()["content"]
-        note_ch = r.json()["note"]
+        conn = http.client.HTTPSConnection('api.tianapi.com')  #接口域名
+        params = urllib.parse.urlencode({'key':'你的APIKEY'})
+        headers = {'Content-type':'application/x-www-form-urlencoded'}
+        conn.request('POST','/everyday/index',params,headers)
+        res = conn.getresponse()
+        data = res.read()
+        note_en = data["newslist"][1]["content"]
+        note_ch = data["newslist"][3]["note"]
         return note_ch, note_en
     else:
         return "",""
@@ -303,6 +302,7 @@ def send_message(to_user, access_token, city_name, weather, max_temperature, min
     elif response["errcode"] == 40003:
         print("推送消息失败，请检查微信号是否正确")
     elif response["errcode"] == 0:
+        print(time.strftime('%Y-%m-%d %H:%M:%S'))
         print("推送消息成功")
     else:
         print(response)
