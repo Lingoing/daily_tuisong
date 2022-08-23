@@ -109,8 +109,8 @@ def get_ciba():
         res = conn.getresponse()
         data = res.read()
         data = json.loads(data)
-        note_en = data["newslist"][1]["content"]
-        note_ch = data["newslist"][3]["note"]
+        note_en = data["newslist"][0]["content"]
+        note_ch = data["newslist"][0]["note"]
         return note_ch, note_en
     else:
         return "",""
