@@ -108,6 +108,7 @@ def get_ciba():
         conn.request('POST','/everyday/index',params,headers)
         res = conn.getresponse()
         data = res.read()
+        data = json.loads(data)
         note_en = data["newslist"][1]["content"]
         note_ch = data["newslist"][3]["note"]
         return note_ch, note_en
