@@ -103,7 +103,7 @@ def get_weather(province, city):
 def get_ciba():
     if (Whether_Eng!="否"):
         conn = http.client.HTTPSConnection('api.tianapi.com')  #接口域名
-        params = urllib.parse.urlencode({'key':'你的APIKEY'})
+        params = urllib.parse.urlencode({'key':'9fe9bef8d7e0921c37cb02264ad1a21b'})
         headers = {'Content-type':'application/x-www-form-urlencoded'}
         conn.request('POST','/everyday/index',params,headers)
         res = conn.getresponse()
