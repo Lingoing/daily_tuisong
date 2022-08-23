@@ -303,7 +303,7 @@ def send_message(to_user, access_token, city_name, weather, max_temperature, min
     elif response["errcode"] == 40003:
         print("推送消息失败，请检查微信号是否正确")
     elif response["errcode"] == 0:
-        print(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime()))
+        print(datetime.now())
         print("推送消息成功")
     else:
         print(response)
